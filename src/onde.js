@@ -1,4 +1,4 @@
-; // Don't remove this lonely semi-colon
+define(function(){
 
 /* NOTES:
  * 
@@ -6,37 +6,6 @@
  *   Use jQuery.fn.text and jQuery.fn.attr rather than string concatenation where possible.
  */
 
-
-/*FIXME: Monkey-patching is not recommended */
-
-// Monkey-patch for browser with no Array.indexOf support
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function(searchElement/*, fromIndex */) {
-        "use strict";
-        if (this === void 0 || this === null)
-            throw new TypeError();
-        var t = Object(this);
-        var len = t.length >>> 0;
-        if (len === 0)
-            return -1;
-        var n = 0;
-        if (arguments.length > 0) {
-            n = Number(arguments[1]);
-            if (n !== n)
-                n = 0;
-            else if (n !== 0 && n !== (1 / 0) && n !== -(1 / 0))
-                n = (n > 0 || -1) * Math.floor(Math.abs(n));
-        }
-        if (n >= len)
-            return -1;
-        var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-        for (; k < len; k++) {
-            if (k in t && t[k] === searchElement)
-                return k;
-        }
-        return -1;
-    };
-}
 // These two are nice things which JS misses so much
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (prefix) {
@@ -73,12 +42,12 @@ onde.Onde = function (formElement, schema, documentInst, opts) {
     this.documentSchema = schema;
     this.documentInstance = documentInst;
     // Object property adder
-    this.panelElement.find('.property-add').live('click', function (evt) {
+    this.panelElement.delegate('.property-add', 'click', function (evt) {
         evt.preventDefault();
         _inst.onAddObjectProperty($(this));
     });
     // Array item adder
-    this.panelElement.find('.item-add').live('click', function (evt) {
+    this.panelElement.delegate('.item-add', 'click', function (evt) {
         evt.preventDefault();
         _inst.onAddListItem($(this));
     });
@@ -101,7 +70,7 @@ onde.Onde = function (formElement, schema, documentInst, opts) {
         }
     });
     // Field deleter (property and item)
-    this.panelElement.find('.field-delete').live('click', function (evt) {
+    this.panelElement.delegate('.field-delete', 'click', function (evt) {
         evt.preventDefault();
         evt.stopPropagation(); //CHECK: Only if collapsible
         $('#' + $(this).attr('data-id')).fadeOut('fast', function () {
@@ -117,7 +86,7 @@ onde.Onde = function (formElement, schema, documentInst, opts) {
         });
     });
     // Type selector
-    this.panelElement.find('.field-type-select').live('change', function (evt) {
+    this.panelElement.delegate('.field-type-select', 'change', function (evt) {
         evt.preventDefault();
         _inst.onFieldTypeChanged($(this));
     });
@@ -1211,3 +1180,7 @@ onde.Onde.prototype.tr = function (text) {
     // Translations go here
     return text;
 };
+
+return onde;
+
+});
