@@ -52,7 +52,7 @@ onde.Onde = function (formElement, schema, documentInst, opts) {
         _inst.onAddListItem($(this));
     });
     // Collapsible field (object and array)
-    this.panelElement.find('.collapser').live('click', function (evt) {
+    this.panelElement.delegate('.collapser', 'click', function (evt) {
         var collapser = $(this);
         var fieldId = collapser.attr('data-fieldvalue-container-id');
         //TODO: Check the field. It must not be inline.
