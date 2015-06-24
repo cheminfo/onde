@@ -457,6 +457,7 @@ define(function(){
                 fieldValueNode.
                     attr('id', fieldValueId).
                     attr('name', fieldName).
+                    data('fieldInfo', fieldInfo).
                     addClass('value-input');
                 if (typeof valueData == 'string') {
                     fieldValueNode.val(valueData);
@@ -590,6 +591,7 @@ define(function(){
             }
             var contN = $('<ol start="0"></ol>').
                 attr('id', fieldValueId).
+                data('fieldInfo', fieldInfo.items).
                 attr('data-type', 'array');
             var lastIndex = 0;
             if (valueData) {
