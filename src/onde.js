@@ -457,7 +457,6 @@ define(function(){
                 fieldValueNode.
                     attr('id', fieldValueId).
                     attr('name', fieldName).
-                    data('fieldInfo', fieldInfo).
                     addClass('value-input');
                 if (typeof valueData == 'string') {
                     fieldValueNode.val(valueData);
@@ -636,6 +635,10 @@ define(function(){
         if(fieldValueNode && fieldInfo && fieldInfo.readonly) {
             fieldValueNode.attr('disabled', true);
             fieldValueNode.css('background-color', 'lightgray');
+        }
+
+        if(fieldValueNode && fieldInfo) {
+            fieldValueNode.data('fieldInfo', fieldInfo);
         }
     };
 
