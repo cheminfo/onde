@@ -417,12 +417,6 @@ define(function(){
         //TODO: Read-only
         //TODO: Schema ref
         var fieldValueId = 'fieldvalue-' + this._fieldNameToID(fieldName);
-        if ('$ref' in fieldInfo) {
-            console.log(fieldInfo);
-            if (valueData) {
-                console.log(valueData);
-            }
-        }
         fieldInfo = this._sanitizeFieldInfo(fieldInfo, valueData);
         var fieldDesc = fieldInfo ? fieldInfo.description || fieldInfo.title : null;
         if (!fieldInfo || !fieldInfo.type || fieldInfo.type == 'any') {
@@ -968,7 +962,6 @@ define(function(){
                 dataType = fvn.attr('data-type');
             }
             if (!dataType || dataType == 'any') {
-                console.log(propName);
                 //TODO: Fallback: string?
                 //TODO: Need to attach the type to the field for array and object
             }
@@ -1055,9 +1048,6 @@ define(function(){
                         result.errorCount += 1;
                         result.errorData = 'value-required';
                     }
-                }
-                if (!propInfo) {
-                    console.log(fieldName);
                 }
             }
         }
