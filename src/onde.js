@@ -1067,23 +1067,23 @@ define(function(){
             if(cRes.noData) {
                 // Default values when no data
                 switch(propInfo.type) {
-                    //case 'string':
-                    //    result.data[propName] = '';
-                    //    break;
-                    //case 'number':case 'integer':
-                    //result.data[propName] = NaN;
-                    //break;
-                    //case 'boolean':
-                    //    result.data[propName] = false;
-                    //    break;
+                    case 'string':
+                        result.data[propName] = '';
+                        break;
+                    case 'number':case 'integer':
+                    result.data[propName] = NaN;
+                    break;
+                    case 'boolean':
+                        result.data[propName] = false;
+                        break;
                     case 'array':
                         result.data[propName] = [];
                         break;
                     case 'object':
                         result.data[propName] = {};
                         break;
-                    //default:
-                    //    result.data[propName] = null;
+                    default:
+                        result.data[propName] = null;
                 }
             }
             if (!cRes.noData) {
