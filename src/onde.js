@@ -7,6 +7,36 @@
  */
 
 
+ 
+function Notifier() {
+    this.handlers = [];  // observers
+}
+
+Notifier.prototype = {
+
+    subscribe: function (fn) {
+        this.handlers.push(fn);
+    },
+
+    unsubscribe: function (fn) {
+        this.handlers = this.handlers.filter(
+            function (item) {
+                if (item !== fn) {
+                    return item;
+                }
+            }
+        );
+    },
+
+    fire: function (o) {
+        this.handlers.forEach(function (item) {
+            //var scope = thisObj || window;
+            console.warn(o);
+            item(o);
+        });
+    }
+}
+
 /*FIXME: Monkey-patching is not recommended */
 
 // Monkey-patch for browser with no Array.indexOf support
@@ -122,6 +152,12 @@ onde.Onde = function (formElement, schema, documentInst, opts) {
         _inst.onFieldTypeChanged($(this));
     });
     //this.panelElement.hide();
+	
+	this.dataChangedNotifier = new Notifier();
+	
+	this.onDataChanged = function (fn) {
+        this.dataChangedNotifier.subscribe(fn)
+    }
 };
 
 onde.Onde.prototype.render = function (schema, data, opts) {
