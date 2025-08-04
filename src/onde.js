@@ -297,7 +297,7 @@ define(function(){
                     optN.text(fieldInfo.enum[iev]);
                     // Select the value
                     if (hasSelected && selectedValue == fieldInfo.enum[iev]) {
-                        optN.attr('selected', 'selected');
+                        optN.prop('selected', 'selected');
                     }
                     fieldValueNode.append(optN);
                 }
@@ -538,13 +538,13 @@ define(function(){
                 addClass('value-input');
             if (valueData === 'on' || valueData === 'true' || valueData === 'checked' ||
                 valueData === '1' || valueData === 1 || valueData === true) {
-                fieldValueNode.attr('checked', 'checked');
+                fieldValueNode.prop('checked', 'checked');
             }
             if (fieldInfo.title) {
                 fieldValueNode.attr('title', fieldInfo.title);
             }
             if ('default' in fieldInfo && fieldInfo['default']) {
-                fieldValueNode.attr('checked', 'checked');
+                fieldValueNode.prop('checked', 'checked');
             }
             fieldValueNode.attr('data-type', fieldInfo.type);
             valueContainer.append(fieldValueNode);
